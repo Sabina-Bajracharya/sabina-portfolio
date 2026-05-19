@@ -1,0 +1,2162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sabina Bajracharya — QA Engineer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Premium Sophisticated Purple Editorial Palette */
+        --vivid: #8b3fbe;
+        --lavender: #c5a0d8;
+        --medium: #7a3baa;
+        --blush: #fdfafd;
+        --deep: #5a258c;
+        --darkv: #29104d;
+        --ink: #1c0a35;
+
+        /* Light theme editorial surfaces */
+        --bg: #fcfcff;
+        --surface: #f7f3fa;
+        --card: #ffffff;
+        --text: #1b0c30;
+        --muted: #6b5687;
+        --border: rgba(139, 63, 190, 0.12);
+        --shadow: rgba(41, 16, 77, 0.04);
+        --shadow-hover: rgba(41, 16, 77, 0.08);
+
+        --grad-hero: linear-gradient(
+          135deg,
+          #f8f0ff 0%,
+          #edd8f5 40%,
+          #e2c8f5 100%
+        );
+        --grad-pill: linear-gradient(135deg, var(--vivid), var(--medium));
+        --grad-soft: linear-gradient(135deg, var(--blush), var(--lavender));
+        --grad-rich: linear-gradient(135deg, var(--medium), var(--darkv));
+
+        --font-serif: "Cormorant Garamond", serif;
+        --font-sans: "Outfit", sans-serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        background: var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+
+      /* ── ANIMATED BACKGROUND ─────────────────────────────── */
+      .bg-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .bg-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.22;
+        animation: drift 18s ease-in-out infinite;
+      }
+      @keyframes drift {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(40px, -40px) scale(1.08);
+        }
+        66% {
+          transform: translate(-30px, 30px) scale(0.92);
+        }
+      }
+
+      /* ── NAV ─────────────────────────────────────────────── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem 6rem;
+        background: rgba(252, 251, 254, 0.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        transition: all 0.3s ease;
+      }
+      .nav-logo {
+        font-family: var(--font-serif);
+        font-size: 1.55rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--vivid);
+      }
+      .nav-logo span {
+        font-style: italic;
+        font-weight: 300;
+        color: var(--muted);
+      }
+      .nav-links {
+        display: flex;
+        gap: 3.5rem;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        font-weight: 600;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.3s;
+        text-transform: uppercase;
+      }
+      .nav-links a:hover {
+        color: var(--vivid);
+      }
+      .nav-cta {
+        padding: 0.65rem 1.6rem;
+        border-radius: 100px;
+        background: linear-gradient(135deg, var(--vivid), var(--medium));
+        color: white;
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(139, 63, 190, 0.2);
+      }
+      .nav-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(139, 63, 190, 0.35);
+      }
+
+      /* ── HERO SECTION (2-Column Layout with Lanyard ID Card) ── */
+      .hero-section-grid {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        align-items: center;
+        gap: 4rem;
+        padding: 5.5rem 6rem 3rem;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+      .hero-name {
+        font-family: var(--font-serif);
+        font-size: clamp(3.2rem, 5.2vw, 5.2rem);
+        font-weight: 700;
+        line-height: 0.92;
+        letter-spacing: -0.02em;
+        animation: floatIn 0.9s 0.1s ease both;
+      }
+      .hero-name .italic {
+        font-style: italic;
+        font-weight: 300;
+        background: var(--grad-pill);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero-role {
+        margin-top: 1.5rem;
+        font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+        font-weight: 300;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+        animation: floatIn 0.9s 0.2s ease both;
+      }
+      .hero-role strong {
+        color: var(--vivid);
+        font-weight: 600;
+      }
+      .hero-desc {
+        max-width: 560px;
+        margin: 1.8rem 0 0;
+        font-size: 0.95rem;
+        line-height: 1.9;
+        color: var(--muted);
+        font-weight: 300;
+        animation: floatIn 0.9s 0.3s ease both;
+      }
+      .hero-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        justify-content: flex-start;
+        margin-top: 2.5rem;
+        animation: floatIn 0.9s 0.4s ease both;
+      }
+      .pill {
+        padding: 0.4rem 1rem;
+        border-radius: 100px;
+        border: 1px solid var(--border);
+        background: white;
+        color: var(--medium);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        box-shadow: 0 2px 10px var(--shadow);
+        transition: all 0.3s;
+      }
+      .pill:hover {
+        background: var(--vivid);
+        color: white;
+        border-color: var(--vivid);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(139, 63, 190, 0.3);
+      }
+      .hero-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 3rem;
+        justify-content: flex-start;
+        animation: floatIn 0.9s 0.5s ease both;
+      }
+      .btn-primary {
+        padding: 0.9rem 2.2rem;
+        border-radius: 100px;
+        background: var(--grad-pill);
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 6px 24px rgba(139, 63, 190, 0.35);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 36px rgba(139, 63, 190, 0.5);
+      }
+      .btn-outline {
+        padding: 0.9rem 2.2rem;
+        border-radius: 100px;
+        border: 1.5px solid var(--lavender);
+        color: var(--medium);
+        background: white;
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .btn-outline:hover {
+        border-color: var(--vivid);
+        color: var(--vivid);
+        box-shadow: 0 4px 20px var(--shadow);
+      }
+      @keyframes floatIn {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── HERO LANYARD ID CARD STYLE ─────────────────────── */
+      .hero-right {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 700px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+        user-select: none;
+      }
+      #lanyard-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+      #card-wrap {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform-origin: top center;
+        cursor: grab;
+        touch-action: none;
+        z-index: 10;
+      }
+      #card-wrap:active {
+        cursor: grabbing;
+      }
+      #card {
+        width: 280px;
+        background: #ffffff; /** id color**/
+        border-radius: 18px;
+        padding: 0;
+        overflow: hidden;
+        box-shadow:
+          0 30px 80px rgba(41, 16, 77, 0.12),
+          0 0 0 1px rgba(139, 63, 190, 0.08);
+        position: relative;
+        border: 1px solid rgba(139, 63, 190, 0.25);
+      }
+      .card-hole {
+        width: 32px;
+        height: 14px;
+        background: var(--bg);
+        border-radius: 7px;
+        margin: 14px auto 0;
+        box-shadow:
+          inset 0 2px 4px rgba(0, 0, 0, 0.1),
+          0 1px 0 rgba(255, 255, 255, 0.8);
+        position: relative;
+        z-index: 2;
+      }
+      .card-inner {
+        padding: 16px 20px 20px;
+        text-align: left;
+      }
+      .card-top-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 18px;
+      }
+      .name-block {
+        flex: 1;
+      }
+      .card-name {
+        font-family: var(--font-sans);
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.15;
+        outline: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+      .card-name:focus {
+        border-color: rgba(139, 63, 190, 0.3);
+      }
+      .card-role {
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        margin-top: 4px;
+        outline: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+      .card-role:focus {
+        border-color: rgba(139, 63, 190, 0.2);
+      }
+      .year-badge {
+        writing-mode: vertical-rl;
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.15em;
+        font-weight: 500;
+        margin-left: 12px;
+        margin-top: 4px;
+        outline: none;
+      }
+      .dept-badge {
+        writing-mode: vertical-rl;
+        font-size: 10px;
+        color: var(--vivid);
+        letter-spacing: 0.12em;
+        font-weight: 600;
+        margin-left: 8px;
+        margin-top: 4px;
+        outline: none;
+      }
+      .photo-area {
+        width: 100%;
+        height: 240px;
+        background: var(--surface);
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 16px;
+        cursor: default;
+        border: 1px solid var(--border);
+      }
+      .photo-area img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: opacity 0.3s;
+      }
+      .photo-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .photo-area:hover .photo-overlay {
+        opacity: 1;
+      }
+      .photo-overlay span {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.8);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .photo-icon {
+        width: 28px;
+        height: 28px;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: #fff;
+      }
+      #fileInput {
+        display: none;
+      }
+      .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 12px;
+        border-top: 1px solid var(--border);
+      }
+      .logo-row {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .logo-icon {
+        width: 22px;
+        height: 22px;
+        background: var(--vivid);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        color: #fff;
+        font-family: var(--font-sans);
+      }
+      .logo-text {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: 0.02em;
+        outline: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+      .logo-text:focus {
+        border-color: rgba(139, 63, 190, 0.2);
+      }
+      .qr-box {
+        width: 60px;
+        height: 60px;
+        background: #fff;
+        border-radius: 6px;
+        padding: 4px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .qr-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .hint-bar {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 10px;
+        color: var(--muted);
+        opacity: 0.7;
+        letter-spacing: 0.05em;
+        background: rgba(139, 63, 190, 0.05);
+        backdrop-filter: blur(10px);
+        padding: 6px 16px;
+        border-radius: 20px;
+        white-space: nowrap;
+        z-index: 20;
+        pointer-events: none;
+        border: 1px solid var(--border);
+      }
+      [contenteditable]:empty::before {
+        content: attr(data-ph);
+        opacity: 0.3;
+      }
+
+      /* ── SECTION STRUCTURAL BASE ────────────────────────── */
+      .section {
+        position: relative;
+        z-index: 1;
+        padding: 8rem 6rem;
+      }
+      .section-tag {
+        font-size: 0.72rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--vivid);
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .section-tag::before {
+        content: "";
+        width: 15px;
+        height: 1.5px;
+        background: var(--vivid);
+      }
+      .section-title {
+        font-family: var(--font-serif);
+        font-size: clamp(2rem, 3.8vw, 3.2rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+        color: var(--text);
+      }
+      .section-title em {
+        font-style: italic;
+        font-weight: 300;
+        color: var(--vivid);
+      }
+
+      /* ── STATS (Original Restored) ─────────────────────── */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        margin: 0 6rem;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 8px 40px var(--shadow);
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .stats.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .stat-card {
+        background: white;
+        padding: 2.2rem 2rem;
+        text-align: center;
+        transition: background 0.3s;
+      }
+      .stat-card:hover {
+        background: var(--surface);
+      }
+      .stat-num {
+        font-family: var(--font-serif);
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1;
+        background: var(--grad-pill);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .stat-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 0.4rem;
+        font-weight: 500;
+      }
+
+      /* ── EXPERIENCE TIMELINE (Original Centered Layout) ──── */
+      .exp-timeline {
+        margin-top: 3rem;
+        position: relative;
+      }
+      .exp-timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        bottom: 0;
+        width: 1.5px;
+        background: linear-gradient(to bottom, var(--lavender), transparent);
+      }
+      .exp-item {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 4rem;
+        margin-bottom: 0;
+        padding: 3rem 0;
+        position: relative;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .exp-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .exp-date {
+        padding-top: 0.2rem;
+      }
+      .exp-date .period {
+        font-size: 0.72rem;
+        color: var(--muted);
+        font-weight: 400;
+        line-height: 1.6;
+      }
+      .exp-date .duration {
+        font-size: 0.65rem;
+        color: var(--lavender);
+        font-weight: 500;
+        margin-top: 0.2rem;
+        letter-spacing: 0.05em;
+      }
+      .exp-dot {
+        position: absolute;
+        left: 50%;
+        top: 3.5rem;
+        transform: translate(-50%, -50%);
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: white;
+        border: 2.5px solid var(--vivid);
+        box-shadow: 0 0 0 4px rgba(139, 63, 190, 0.12);
+        z-index: 2;
+      }
+      .exp-dot.active {
+        background: var(--vivid);
+        box-shadow:
+          0 0 0 5px rgba(139, 63, 190, 0.2),
+          0 0 16px rgba(139, 63, 190, 0.4);
+      }
+      .exp-content {
+        padding-left: 0;
+      }
+      .exp-role {
+        font-family: var(--font-serif);
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.2;
+        margin-bottom: 0.3rem;
+      }
+      .exp-company {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--vivid);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .exp-company .type-badge {
+        padding: 0.15rem 0.6rem;
+        border-radius: 100px;
+        background: var(--surface);
+        font-size: 0.6rem;
+        font-weight: 500;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        border: 1px solid var(--border);
+      }
+      .exp-location {
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-top: 0.3rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .exp-skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 1rem;
+      }
+      .exp-skill {
+        padding: 0.25rem 0.7rem;
+        border-radius: 100px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        font-size: 0.65rem;
+        font-weight: 500;
+        color: var(--medium);
+        letter-spacing: 0.04em;
+      }
+      .exp-skill.highlight {
+        background: linear-gradient(
+          135deg,
+          rgba(139, 63, 190, 0.12),
+          rgba(122, 59, 170, 0.12)
+        );
+        border-color: rgba(139, 63, 190, 0.25);
+        color: var(--vivid);
+      }
+
+      /* Alternating items alignment */
+      .exp-item:nth-child(odd) .exp-date {
+        grid-column: 1;
+        text-align: right;
+        padding-right: 2.5rem;
+      }
+      .exp-item:nth-child(odd) .exp-content {
+        grid-column: 2;
+        text-align: left;
+        padding-left: 2.5rem;
+      }
+      .exp-item:nth-child(odd) .exp-skills,
+      .exp-item:nth-child(odd) .exp-company,
+      .exp-item:nth-child(odd) .exp-location {
+        justify-content: flex-start;
+      }
+      .exp-item:nth-child(even) .exp-date {
+        grid-column: 2;
+        text-align: left;
+        padding-left: 2.5rem;
+      }
+      .exp-item:nth-child(even) .exp-content {
+        grid-column: 1;
+        text-align: right;
+        padding-right: 2.5rem;
+      }
+      .exp-item:nth-child(even) .exp-skills,
+      .exp-item:nth-child(even) .exp-company,
+      .exp-item:nth-child(even) .exp-location {
+        justify-content: flex-end;
+      }
+
+      /* ── TECH STACK (INTERACTIVE GRID) ──────────────────── */
+      .skills-intro-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.15fr;
+        gap: 4rem;
+        margin-bottom: 4rem;
+        align-items: flex-end;
+      }
+      .skills-intro-desc {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: var(--muted);
+        font-weight: 300;
+      }
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+      .skill-card {
+        background: var(--card);
+        border-radius: 20px;
+        border: 1.5px solid var(--border);
+        padding: 2.2rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        flex-direction: column;
+        min-height: 250px;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .skill-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .skill-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--vivid);
+        box-shadow: 0 16px 40px var(--shadow-hover);
+      }
+      .skill-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+      .skill-icon-wrap {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--vivid);
+        transition: transform 0.4s ease;
+      }
+      .skill-card:hover .skill-icon-wrap {
+        transform: scale(1.15) rotate(5deg);
+      }
+      .skill-category-tag {
+        font-size: 0.62rem;
+        font-weight: 600;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        background: var(--surface);
+        padding: 0.25rem 0.65rem;
+        border-radius: 100px;
+        border: 1px solid rgba(139, 63, 190, 0.08);
+      }
+      .skill-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.8rem;
+      }
+      .skill-desc {
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.6;
+        font-weight: 300;
+        margin-bottom: 1.5rem;
+        flex: 1;
+      }
+      .skill-meta {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--vivid);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid var(--border);
+        padding-top: 1rem;
+        margin-top: auto;
+      }
+      .skill-metric-label {
+        color: var(--muted);
+        font-weight: normal;
+      }
+
+      /* ── ABOUT ME ────────────────────────────────────────── */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 5rem;
+        align-items: center;
+        margin-top: 3.5rem;
+      }
+      .about-visual {
+        position: relative;
+        height: 580px;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 20px 45px var(--shadow-hover);
+        border: 1.5px solid var(--border);
+        background: linear-gradient(
+          135deg,
+          var(--surface) 0%,
+          var(--blush) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .about-img-wrapper {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+      .about-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        display: block;
+      }
+      .about-visual:hover .about-img-wrapper img {
+        transform: scale(1.08);
+      }
+      .about-visual-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(139, 63, 190, 0.08) 0%,
+          rgba(41, 16, 77, 0.25) 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+      }
+      .about-card-badge {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        right: 30px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 18px;
+        padding: 1.5rem;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+      .about-avatar-placeholder {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--vivid), var(--medium));
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-serif);
+        font-weight: 700;
+        font-size: 1.35rem;
+        border: 3px solid white;
+        box-shadow: 0 4px 15px rgba(139, 63, 190, 0.25);
+      }
+      .about-badge-details h4 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.15rem;
+      }
+      .about-badge-details p {
+        font-size: 0.72rem;
+        color: var(--muted);
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+      .about-text h3 {
+        font-family: var(--font-serif);
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 1.5rem;
+      }
+      .about-text p {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        color: var(--muted);
+        font-weight: 300;
+        margin-bottom: 1.5rem;
+      }
+      .about-text p strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .about-highlights {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+      .about-highlight-card {
+        border: 1.5px solid var(--border);
+        border-radius: 16px;
+        padding: 1.2rem;
+        background: var(--card);
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8rem;
+        transition: all 0.3s ease;
+      }
+      .about-highlight-card:hover {
+        border-color: var(--vivid);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px var(--shadow-hover);
+      }
+      .about-hi-icon {
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+      .about-hi-info strong {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.15rem;
+      }
+      .about-hi-info span {
+        font-size: 0.75rem;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+
+      /* ── CONTACT ME ──────────────────────────────────────── */
+      .contact-section {
+        text-align: center;
+        background: linear-gradient(
+          135deg,
+          var(--surface) 0%,
+          var(--blush) 100%
+        );
+      }
+      .contact-inner {
+        max-width: 680px;
+        margin: 0 auto;
+      }
+      .contact-title {
+        font-family: var(--font-serif);
+        font-size: clamp(2.5rem, 5.2vw, 4.2rem);
+        font-weight: 700;
+        line-height: 1.1;
+        color: var(--text);
+        margin: 1rem 0 1.5rem;
+      }
+      .contact-title em {
+        font-style: italic;
+        font-weight: 300;
+        color: var(--vivid);
+      }
+      .contact-sub {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.8;
+        font-weight: 300;
+        margin-bottom: 2.8rem;
+      }
+      .contact-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .contact-btn {
+        padding: 0.9rem 2.2rem;
+        border-radius: 100px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+      }
+      .contact-btn-primary {
+        background: var(--text);
+        color: white;
+        box-shadow: 0 6px 20px rgba(27, 12, 48, 0.15);
+      }
+      .contact-btn-primary:hover {
+        background: var(--vivid);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(139, 63, 190, 0.25);
+      }
+      .contact-btn-outline {
+        background: var(--card);
+        color: var(--medium);
+        border: 1.5px solid var(--border);
+      }
+      .contact-btn-outline:hover {
+        border-color: var(--vivid);
+        color: var(--vivid);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px var(--shadow-hover);
+      }
+
+      /* ── FOOTER ──────────────────────────────────────────── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2.5rem 6rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--card);
+        font-size: 0.75rem;
+        color: var(--muted);
+        position: relative;
+        z-index: 1;
+      }
+      .footer-logo {
+        font-family: var(--font-serif);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--vivid);
+      }
+      .footer-copy {
+        letter-spacing: 0.05em;
+      }
+      .footer-top {
+        text-decoration: none;
+        color: var(--muted);
+        transition: color 0.3s;
+        font-weight: 600;
+      }
+      .footer-top:hover {
+        color: var(--vivid);
+      }
+
+      /* ── RESPONSIVE MEDIA QUERIES ────────────────────────── */
+      @media (max-width: 1024px) {
+        nav {
+          padding: 1.2rem 3rem;
+        }
+        .hero-section-grid {
+          grid-template-columns: 1fr;
+          padding: 5.5rem 2rem 3rem;
+          gap: 2rem;
+          text-align: center;
+        }
+        .hero-left {
+          align-items: center;
+          text-align: center;
+        }
+        .hero-desc {
+          margin: 1.8rem auto 0;
+        }
+        .hero-pills {
+          justify-content: center;
+        }
+        .hero-actions {
+          justify-content: center;
+        }
+        .hero-right {
+          min-height: 660px;
+        }
+        .section {
+          padding: 6rem 3rem;
+        }
+        .stats {
+          margin: 0 3rem;
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .exp-timeline::before {
+          left: 0;
+          transform: none;
+        }
+        .exp-item {
+          grid-template-columns: 1fr;
+          gap: 0;
+          padding-left: 2rem;
+          padding-right: 0;
+          padding-top: 2rem;
+          padding-bottom: 2rem;
+          border-bottom: 1px solid var(--border);
+        }
+        .exp-item:last-child {
+          border-bottom: none;
+        }
+        .exp-dot {
+          left: -5px;
+          top: 2.3rem;
+          transform: translateY(-50%);
+        }
+        .exp-item:nth-child(odd) .exp-date,
+        .exp-item:nth-child(even) .exp-date {
+          grid-column: span 1;
+          text-align: left;
+          padding-right: 0;
+          padding-left: 0;
+          margin-bottom: 0.5rem;
+        }
+        .exp-item:nth-child(odd) .exp-content,
+        .exp-item:nth-child(even) .exp-content {
+          grid-column: span 1;
+          text-align: left;
+          padding-left: 0;
+          padding-right: 0;
+        }
+        .exp-item:nth-child(even) .exp-skills,
+        .exp-item:nth-child(even) .exp-company,
+        .exp-item:nth-child(even) .exp-location {
+          justify-content: flex-start;
+        }
+        .skills-intro-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+          text-align: left;
+        }
+        .skills-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 3.5rem;
+        }
+        footer {
+          padding: 2rem 3rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .stats {
+          margin: 0 1.5rem;
+          grid-template-columns: 1fr;
+        }
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+        .about-highlights {
+          grid-template-columns: 1fr;
+        }
+        footer {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background -->
+    <div class="bg-canvas">
+      <div
+        class="bg-orb"
+        style="
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, #d8b4f8, #c084fc);
+          top: -150px;
+          right: -100px;
+          animation-delay: 0s;
+        "
+      ></div>
+      <div
+        class="bg-orb"
+        style="
+          width: 400px;
+          height: 400px;
+          background: radial-gradient(circle, #e9d5ff, #a855f7);
+          bottom: 20%;
+          left: -100px;
+          animation-delay: -5s;
+        "
+      ></div>
+      <div
+        class="bg-orb"
+        style="
+          width: 300px;
+          height: 300px;
+          background: radial-gradient(circle, #f3e8ff, #8b3fbe);
+          top: 50%;
+          left: 40%;
+          animation-delay: -8s;
+        "
+      ></div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+      <div class="nav-logo">Sabina <span>Bajracharya</span></div>
+      <ul class="nav-links">
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="mailto:sabina@email.com" class="nav-cta">Hire Me</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-section-grid">
+      <!-- Left Column: Bio Content -->
+      <div class="hero-left">
+        <h1 class="hero-name">
+          Sabina<br /><span class="italic">Bajracharya</span>
+        </h1>
+        <p class="hero-role">
+          <strong>Senior Quality Assurance Engineer</strong> · 3+ Years of
+          Testing Excellence
+        </p>
+        <p class="hero-desc">
+          I build confidence in software — crafting rigorous test strategies,
+          automating workflows with Playwright, and ensuring flawless user
+          experiences from Kathmandu to Sydney.
+        </p>
+        <div class="hero-pills">
+          <span class="pill">Playwright</span>
+          <span class="pill">Selenium</span>
+          <span class="pill">API Testing</span>
+          <span class="pill">Regression Testing</span>
+          <span class="pill">Bug Tracking</span>
+          <span class="pill">JMeter</span>
+          <span class="pill">Postman</span>
+          <span class="pill">Software Quality</span>
+        </div>
+        <div class="hero-actions">
+          <a href="#experience" class="btn-primary">View Experience ↓</a>
+          <a href="#contact" class="btn-outline">Get in Touch</a>
+        </div>
+      </div>
+
+      <!-- Right Column: Lanyard ID Card Simulation -->
+      <div class="hero-right">
+        <canvas id="lanyard-canvas"></canvas>
+        <div id="card-wrap">
+          <div id="card">
+            <div class="card-hole"></div>
+            <div class="card-inner">
+              <div class="card-top-row">
+                <div class="name-block">
+                  <div class="card-name">Sabina<br />Bajracharya</div>
+                  <div class="card-role">Senior QA Engineer</div>
+                </div>
+                <span class="year-badge">2026</span>
+                <span class="dept-badge">QA/E2E</span>
+              </div>
+
+              <div class="photo-area">
+                <img id="photo" src="sabina.jpeg" alt="Photo" />
+              </div>
+
+              <div class="card-footer">
+                <div class="logo-row">
+                  <div class="logo-icon">G</div>
+                  <span class="logo-text">GuardWare</span>
+                </div>
+                <div class="qr-box">
+                  <img src="image.png" alt="QR" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hint-bar">Drag the card to swing it</div>
+      </div>
+    </section>
+
+    <!-- STATS (Original Restored) -->
+    <div class="stats reveal">
+      <div class="stat-card">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years in QA</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Countries</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Tools Mastered</div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE TIMELINE (Original Restored) -->
+    <section class="section" id="experience">
+      <div style="text-align: center; margin-bottom: 3.5rem">
+        <div class="section-tag" style="justify-content: center">
+          Career Journey
+        </div>
+        <h2 class="section-title">Work <em>Experience</em></h2>
+      </div>
+
+      <div class="exp-timeline">
+        <!-- GuardWare -->
+        <div class="exp-item">
+          <div class="exp-date">
+            <div class="period">Feb 2025 — Present</div>
+            <div class="duration">1 yr 4 mos</div>
+          </div>
+          <div class="exp-dot active"></div>
+          <div class="exp-content">
+            <div class="exp-role">Senior Quality Assurance Engineer</div>
+            <div class="exp-company">
+              GuardWare Australia
+              <span class="type-badge">Full-time</span>
+            </div>
+            <div class="exp-location">
+              📍 Sydney, New South Wales, Australia · On-site
+            </div>
+            <div class="exp-skills">
+              <span class="exp-skill highlight">Playwright</span>
+              <span class="exp-skill">Test Automation</span>
+              <span class="exp-skill">Quality Strategy</span>
+              <span class="exp-skill">CI/CD Integration</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRSNTR -->
+        <div class="exp-item">
+          <div class="exp-date">
+            <div class="period">Oct 2024 — Oct 2025</div>
+            <div class="duration">1 yr 1 mo</div>
+          </div>
+          <div class="exp-dot"></div>
+          <div class="exp-content">
+            <div class="exp-role">Quality Assurance Engineer</div>
+            <div class="exp-company">
+              PRSNTR
+              <span class="type-badge">Freelance</span>
+            </div>
+            <div class="exp-location">
+              📍 Melbourne, Victoria, Australia · Remote
+            </div>
+            <div class="exp-skills">
+              <span class="exp-skill">Manual Testing</span>
+              <span class="exp-skill">UI Testing</span>
+              <span class="exp-skill">Remote Collaboration</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yarsa Labs Mid -->
+        <div class="exp-item">
+          <div class="exp-date">
+            <div class="period">Jan 2024 — Feb 2025</div>
+            <div class="duration">1 yr 2 mos</div>
+          </div>
+          <div class="exp-dot"></div>
+          <div class="exp-content">
+            <div class="exp-role">Mid Quality Assurance Engineer</div>
+            <div class="exp-company">
+              Yarsa Labs
+              <span class="type-badge">Full-time</span>
+            </div>
+            <div class="exp-location">📍 Bāgmatī, Nepal · On-site</div>
+            <div class="exp-skills">
+              <span class="exp-skill highlight">Bug Tracking</span>
+              <span class="exp-skill highlight">Software Quality</span>
+              <span class="exp-skill">Test Planning</span>
+              <span class="exp-skill">Test Case Design</span>
+              <span class="exp-skill">+11 skills</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yarsa Labs Trainee -->
+        <div class="exp-item">
+          <div class="exp-date">
+            <div class="period">Aug 2023 — Jan 2024</div>
+            <div class="duration">6 mos</div>
+          </div>
+          <div class="exp-dot"></div>
+          <div class="exp-content">
+            <div class="exp-role">Quality Assurance Trainee</div>
+            <div class="exp-company">
+              Yarsa Labs
+              <span class="type-badge">Full-time</span>
+            </div>
+            <div class="exp-location">📍 Nepal · On-site</div>
+            <div class="exp-skills">
+              <span class="exp-skill highlight">Selenium</span>
+              <span class="exp-skill highlight">JMeter</span>
+              <span class="exp-skill">Performance Testing</span>
+              <span class="exp-skill">+11 skills</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chitrabazaar -->
+        <div class="exp-item">
+          <div class="exp-date">
+            <div class="period">Jan 2023 — Jul 2023</div>
+            <div class="duration">7 mos</div>
+          </div>
+          <div class="exp-dot"></div>
+          <div class="exp-content">
+            <div class="exp-role">Quality Assurance Intern</div>
+            <div class="exp-company">
+              Chitrabazaar
+              <span class="type-badge">Full-time</span>
+            </div>
+            <div class="exp-location">
+              📍 Kathmandu, Bāgmatī, Nepal · On-site
+            </div>
+            <div class="exp-skills">
+              <span class="exp-skill highlight">Postman API</span>
+              <span class="exp-skill highlight">Regression Testing</span>
+              <span class="exp-skill">Exploratory Testing</span>
+              <span class="exp-skill">+6 skills</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CloudFactory -->
+        <div class="exp-item">
+          <div class="exp-date">
+            <div class="period">Apr 2022 — Jul 2023</div>
+            <div class="duration">1 yr 4 mos</div>
+          </div>
+          <div class="exp-dot"></div>
+          <div class="exp-content">
+            <div class="exp-role">Data Specialist</div>
+            <div class="exp-company">
+              CloudFactory
+              <span class="type-badge">Full-time</span>
+            </div>
+            <div class="exp-location">📍 Nepal</div>
+            <div class="exp-skills">
+              <span class="exp-skill highlight">Data Analysis</span>
+              <span class="exp-skill highlight">Image Annotation</span>
+              <span class="exp-skill">Data Quality</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nepal Telecom -->
+        <div class="exp-item">
+          <div class="exp-date">
+            <div class="period">Apr 2022 — Apr 2023</div>
+            <div class="duration">1 yr 1 mo</div>
+          </div>
+          <div class="exp-dot"></div>
+          <div class="exp-content">
+            <div class="exp-role">Brand Model</div>
+            <div class="exp-company">
+              Nepal Telecom
+              <span class="type-badge">Contract</span>
+            </div>
+            <div class="exp-location">📍 Nepal · On-site</div>
+            <div class="exp-skills">
+              <span class="exp-skill">Brand Representation</span>
+              <span class="exp-skill">Communications</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH STACK SECTION (INTERACTIVE GRID) -->
+    <section class="section" id="skills">
+      <div class="skills-intro-grid">
+        <div>
+          <div class="section-tag">Expertise</div>
+          <h2 class="section-title">Technical <em>Arsenal</em></h2>
+        </div>
+        <div class="skills-intro-desc">
+          Minimalist, high-performance tooling built to audit complex workflows.
+          Ranging from modern frontend Playwright E2E suites to microservice API
+          validation and telemetry profiling.
+        </div>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Automation -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-icon-wrap">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="20" height="16" x="2" y="4" rx="2" ry="2" />
+                <path d="M6 8h.01" />
+                <path d="M10 8h.01" />
+                <path d="M14 8h.01" />
+                <path d="m9 14 2 2 4-4" />
+              </svg>
+            </div>
+            <span class="skill-category-tag">E2E Frameworks</span>
+          </div>
+          <h3 class="skill-name">Test Automation</h3>
+          <p class="skill-desc">
+            Playwright &amp; Selenium implementation for web platforms,
+            producing fast execution profiles and parallel CI suite setups.
+          </p>
+          <div class="skill-meta">
+            <span>[ PLAYWRIGHT / SELENIUM ]</span>
+            <span class="skill-metric-label"
+              >Pass Rate: <strong style="color: var(--vivid)">95%</strong></span
+            >
+          </div>
+        </div>
+
+        <!-- API Testing -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-icon-wrap">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+                />
+                <path
+                  d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+                />
+              </svg>
+            </div>
+            <span class="skill-category-tag">API Integration</span>
+          </div>
+          <h3 class="skill-name">API Validation</h3>
+          <p class="skill-desc">
+            RESTful endpoint contract, stateful logic verification, and token
+            authentication testing using automated Postman and scripting
+            structures.
+          </p>
+          <div class="skill-meta">
+            <span>[ POSTMAN / REST ]</span>
+            <span class="skill-metric-label"
+              >Coverage: <strong style="color: var(--vivid)">90%</strong></span
+            >
+          </div>
+        </div>
+
+        <!-- Performance -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-icon-wrap">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 2v4" />
+                <path d="m19 7-3 3" />
+                <path d="M22 12h-4" />
+                <path d="m19 17-3-3" />
+                <path d="M12 22v-4" />
+                <path d="m5 17 3-3" />
+                <path d="M2 12h4" />
+                <path d="m5 7 3 3" />
+                <path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+              </svg>
+            </div>
+            <span class="skill-category-tag">Load Testing</span>
+          </div>
+          <h3 class="skill-name">Performance Profiling</h3>
+          <p class="skill-desc">
+            Load, stress, and spike performance assessments via Apache JMeter to
+            isolate system threshold limits and application latency spikes.
+          </p>
+          <div class="skill-meta">
+            <span>[ JMETER / SPIKES ]</span>
+            <span class="skill-metric-label"
+              >Throughput:
+              <strong style="color: var(--vivid)">82%</strong></span
+            >
+          </div>
+        </div>
+
+        <!-- Bug Tracking -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-icon-wrap">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M8 2v4" />
+                <path d="M16 2v4" />
+                <path d="M12 7c-3.3 0-6 2.7-6 6v4h12v-4c0-3.3-2.7-6-6-6z" />
+                <path d="M6 13H2" />
+                <path d="M22 13h-4" />
+                <path d="M3 18l3-1" />
+                <path d="M18 17l3 1" />
+                <path d="M4 8l3 2" />
+                <path d="M17 10l3-2" />
+              </svg>
+            </div>
+            <span class="skill-category-tag">Lifecycle</span>
+          </div>
+          <h3 class="skill-name">Defect Management</h3>
+          <p class="skill-desc">
+            Traceable issue tracking patterns, detailed audit paths, root cause
+            research, and structured regression loops to ensure zero recurrence.
+          </p>
+          <div class="skill-meta">
+            <span>[ TRACEABILITY / JIRA ]</span>
+            <span class="skill-metric-label"
+              >Resolution:
+              <strong style="color: var(--vivid)">93%</strong></span
+            >
+          </div>
+        </div>
+
+        <!-- Regression -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-icon-wrap">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"
+                />
+              </svg>
+            </div>
+            <span class="skill-category-tag">Pipeline Guard</span>
+          </div>
+          <h3 class="skill-name">Regression Auditing</h3>
+          <p class="skill-desc">
+            Integration of automated quality gates in release configurations,
+            safeguarding main branches from code regression behaviors.
+          </p>
+          <div class="skill-meta">
+            <span>[ CI/CD / GATES ]</span>
+            <span class="skill-metric-label"
+              >Safeguard: <strong style="color: var(--vivid)">92%</strong></span
+            >
+          </div>
+        </div>
+
+        <!-- Data -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-icon-wrap">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+              </svg>
+            </div>
+            <span class="skill-category-tag">Annotation &amp; Quality</span>
+          </div>
+          <h3 class="skill-name">Data Quality Assurance</h3>
+          <p class="skill-desc">
+            Evaluation of large training datasets, verification of annotation
+            vectors, and validation of structural metadata.
+          </p>
+          <div class="skill-meta">
+            <span>[ ANALYSIS / SCHEMAS ]</span>
+            <span class="skill-metric-label"
+              >Accuracy: <strong style="color: var(--vivid)">78%</strong></span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="section about-section" id="about">
+      <div class="about-grid">
+        <div class="about-visual">
+          <div class="about-img-wrapper">
+            <img src="sabina.jpeg" alt="Sabina Bajracharya" />
+          </div>
+          <div class="about-visual-overlay"></div>
+          <!-- Interactive Editorial Badge representing Sabina -->
+          <div class="about-card-badge">
+            <div
+              class="about-avatar-placeholder"
+              style="overflow: hidden; padding: 0"
+            >
+              <img
+                src="sabina.jpeg"
+                alt="Avatar"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+            </div>
+            <div class="about-badge-details">
+              <h4>Sabina Bajracharya</h4>
+              <p>Senior Quality Advocate · Sydney, AU</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-text">
+          <div class="section-tag">About Me</div>
+          <h2 class="section-title" style="margin-bottom: 2rem">
+            The Mindset Behind <em>Quality</em>
+          </h2>
+          <p>
+            I am <strong>Sabina Bajracharya</strong>, a Senior QA Engineer
+            currently based in Sydney, Australia, working with GuardWare
+            Australia. My background spans timezones and structural QA
+            methodologies — originating in Kathmandu, Nepal, and scaling to
+            international remote contexts.
+          </p>
+          <p>
+            I believe that software testing is not a secondary stage, but a
+            <strong>primary engineering practice</strong>. My approach
+            prioritises the construction of reliable test architectures, API
+            telemetry, and regression environments that empower development
+            speeds rather than limiting them.
+          </p>
+          <p>
+            From web frameworks to data validation layers, I focus on the
+            broader quality ecosystem, bringing a analytical and structured view
+            to deployment configurations.
+          </p>
+          <div class="about-highlights">
+            <div class="about-highlight-card">
+              <div class="about-hi-icon">🇦🇺</div>
+              <div class="about-hi-info">
+                <strong>Sydney Resident</strong>
+                <span>On-site execution at GuardWare Australia</span>
+              </div>
+            </div>
+            <div class="about-highlight-card">
+              <div class="about-hi-icon">🌏</div>
+              <div class="about-hi-info">
+                <strong>Global Context</strong>
+                <span
+                  >Experience across Australian, Nepalese & remote global
+                  structures</span
+                >
+              </div>
+            </div>
+            <div class="about-highlight-card">
+              <div class="about-hi-icon">🎭</div>
+              <div class="about-hi-info">
+                <strong>Playwright Core</strong>
+                <span>Focusing on robust E2E test scripts</span>
+              </div>
+            </div>
+            <div class="about-highlight-card">
+              <div class="about-hi-icon">🔬</div>
+              <div class="about-hi-info">
+                <strong>Bespoke Quality</strong>
+                <span>Integrating gates directly in release flows</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section contact-section" id="contact">
+      <div class="contact-inner">
+        <div class="section-tag">Let's Connect</div>
+        <h2 class="contact-title">
+          Let's build<br /><em>reliability</em> together.
+        </h2>
+        <p class="contact-sub">
+          Open to senior quality assurance roles, custom E2E automation audits,
+          and CI/CD consulting.<br />
+          Located in Sydney — open to international engagements.
+        </p>
+        <div class="contact-links">
+          <a
+            href="https://linkedin.com/in/sabina-bajracharya-8366751ab"
+            class="contact-btn contact-btn-primary"
+            target="_blank"
+          >
+            LinkedIn Profile
+          </a>
+          <a
+            href="mailto:sabina@email.com"
+            class="contact-btn contact-btn-outline"
+            >Send Email</a
+          >
+          <a href="#" class="contact-btn contact-btn-outline">Download CV</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-logo">Sabina Bajracharya</div>
+      <div class="footer-copy">
+        © 2026 · Senior QA Engineer · Sydney, Australia
+      </div>
+      <a href="#" class="footer-top">Back to top ↑</a>
+    </footer>
+
+    <script>
+      // Intersection Observer for animated entrance
+      const observerOptions = {
+        threshold: 0.12,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const entryObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            entryObserver.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      // Observe exp-items and skill-cards
+      document
+        .querySelectorAll(".exp-item, .skill-card, .stats")
+        .forEach((card, idx) => {
+          entryObserver.observe(card);
+          // Stagger transitions slightly
+          card.style.transitionDelay = `${(idx % 3) * 0.08}s`;
+        });
+
+      // Staggered exp items
+      document.querySelectorAll(".exp-item").forEach((el, i) => {
+        el.style.transitionDelay = i * 0.08 + "s";
+      });
+
+      // Lanyard Physics Simulation
+      const canvas = document.getElementById("lanyard-canvas");
+      const ctx = canvas.getContext("2d");
+      const wrap = document.getElementById("card-wrap");
+      const rightContainer = document.querySelector(".hero-right");
+
+      let W, H;
+      function resize() {
+        if (!rightContainer) return;
+        W = canvas.width = rightContainer.offsetWidth;
+        H = canvas.height = rightContainer.offsetHeight;
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      const CARD_W = 280;
+      const CARD_H = 490;
+      const HOLE_X = 0;
+      const HOLE_Y = 7;
+
+      const anchorX = () => W / 2;
+      const anchorY = () => 0;
+
+      let angle = 0;
+      let angleVel = 0;
+      let restY = 160;
+      let cardY = restY;
+      let cardVelY = 0;
+
+      let dragging = false;
+      let dragStartX = 0,
+        dragStartY = 0;
+      let dragStartAngle = 0;
+      let lastDragX = 0,
+        lastDragY = 0;
+      let dragVelX = 0;
+
+      function drawLanyard() {
+        ctx.clearRect(0, 0, W, H);
+
+        const ax = anchorX(),
+          ay = anchorY();
+        const holeX = ax + Math.sin(angle) * (restY + HOLE_Y);
+        const holeY = restY + HOLE_Y;
+
+        const stripeW = 16;
+        const lLen = restY + HOLE_Y + 10;
+
+        ctx.save();
+
+        const gradY = ctx.createLinearGradient(0, 0, 0, lLen);
+        gradY.addColorStop(0, "#8b3fbe");
+        gradY.addColorStop(0.5, "#5a258c");
+        gradY.addColorStop(1, "#29104d");
+
+        const leftX = ax - stripeW / 2;
+        const rightX = ax + stripeW / 2;
+
+        const destX = holeX;
+        const destY = holeY;
+
+        ctx.beginPath();
+        ctx.moveTo(leftX, ay);
+        ctx.quadraticCurveTo(
+          leftX + Math.sin(angle) * lLen * 0.5,
+          lLen * 0.5,
+          destX - 4,
+          destY,
+        );
+        ctx.lineWidth = stripeW;
+        ctx.strokeStyle = gradY;
+        ctx.lineCap = "round";
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(rightX, ay);
+        ctx.quadraticCurveTo(
+          rightX + Math.sin(angle) * lLen * 0.5,
+          lLen * 0.5,
+          destX + 4,
+          destY,
+        );
+        ctx.lineWidth = stripeW;
+        ctx.strokeStyle = gradY;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(ax - stripeW / 2 + 2, ay);
+        ctx.quadraticCurveTo(
+          ax - stripeW / 2 + 2 + Math.sin(angle) * lLen * 0.5,
+          lLen * 0.5,
+          destX - 2,
+          destY,
+        );
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = "rgba(255,255,255,0.15)";
+        ctx.stroke();
+
+        ctx.restore();
+
+        wrap.style.left = ax - CARD_W / 2 + "px";
+        wrap.style.top = restY + "px";
+        wrap.style.transform = `rotate(${angle}rad)`;
+      }
+
+      function physics(dt) {
+        if (dragging) return;
+
+        const gravity = 6.0;
+        const damping = 0.93;
+        const spring = 0.18;
+
+        angleVel += -spring * angle;
+        angleVel *= damping;
+        angle += angleVel;
+
+        const maxAngle = Math.PI / 2.8;
+        if (Math.abs(angle) > maxAngle) {
+          angle = Math.sign(angle) * maxAngle;
+          angleVel = -angleVel * 0.3;
+        }
+      }
+
+      let last = performance.now();
+      function loop(now) {
+        const dt = (now - last) / 1000;
+        last = now;
+        physics(dt);
+        drawLanyard();
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+
+      function getEventXY(e) {
+        if (e.touches)
+          return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        return { x: e.clientX, y: e.clientY };
+      }
+
+      wrap.addEventListener("mousedown", startDrag);
+      wrap.addEventListener("touchstart", startDrag, { passive: false });
+
+      function startDrag(e) {
+        if (
+          e.target.closest("[contenteditable]") ||
+          e.target.closest("#photoArea")
+        )
+          return;
+        e.preventDefault();
+        dragging = true;
+        const { x, y } = getEventXY(e);
+        dragStartX = x;
+        dragStartY = y;
+        dragStartAngle = angle;
+        lastDragX = x;
+        dragVelX = 0;
+        wrap.style.cursor = "grabbing";
+      }
+
+      window.addEventListener("mousemove", onDrag);
+      window.addEventListener("touchmove", onDrag, { passive: false });
+
+      function onDrag(e) {
+        if (!dragging) return;
+        e.preventDefault();
+        const { x, y } = getEventXY(e);
+        dragVelX = x - lastDragX;
+        lastDragX = x;
+
+        const rect = rightContainer.getBoundingClientRect();
+        const anchorClientX = rect.left + rect.width / 2;
+        const dx = x - anchorClientX;
+        const arm = restY + CARD_H / 2;
+        angle = Math.atan2(dx, arm) * 0.85;
+
+        const maxA = Math.PI / 2.5;
+        angle = Math.max(-maxA, Math.min(maxA, angle));
+      }
+
+      window.addEventListener("mouseup", endDrag);
+      window.addEventListener("touchend", endDrag);
+
+      function endDrag(e) {
+        if (!dragging) return;
+        dragging = false;
+        angleVel = dragVelX * 0.012;
+        wrap.style.cursor = "grab";
+      }
+    </script>
+  </body>
+</html>
